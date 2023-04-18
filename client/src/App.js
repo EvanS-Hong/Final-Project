@@ -3,28 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [serverData, setServerData] = useState("");
-
-  useEffect(() => {
-    async function getServerData() {
-      const resp = await fetch('/api/hello');
-      const data = await resp.json();
-
-      console.log('Data from server:', data);
-
-      setServerData(data.message);
-    }
-
-    getServerData();
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>{serverData}</h1>
-      </header>
-    </div>
+    <>
+      <img className='button'  src="https://cdn-icons-png.flaticon.com/512/56/56763.png" alt="Menu button" />
+    </>
   );
 }
 
