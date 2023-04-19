@@ -8,7 +8,7 @@ create schema "public";
 
 CREATE TABLE "public"."Users" (
 	"UserID" serial NOT NULL,
-	"Name" serial NOT NULL UNIQUE,
+	"Username" TEXT NOT NULL UNIQUE,
 	"Password" TEXT NOT NULL,
 	"Role" TEXT NOT NULL,
 	"Latitude" DECIMAL NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE "public"."Users" (
 
 CREATE TABLE "public"."Locations" (
 	"LocationID" serial NOT NULL,
-	"Country" serial NOT NULL,
+	"Country" TEXT NOT NULL,
 	"Region" TEXT NOT NULL,
 	"Longitude" DECIMAL NOT NULL,
 	"Latitude" DECIMAL NOT NULL,
