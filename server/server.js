@@ -19,6 +19,7 @@ const app = express();
 const reactStaticDir = new URL('../client/build', import.meta.url).pathname;
 const uploadsStaticDir = new URL('public', import.meta.url).pathname;
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(reactStaticDir));
 // Static directory for file uploads server/public/
 app.use(express.static(uploadsStaticDir));
@@ -62,24 +63,24 @@ app.post('/api/Users/sign-up', async (req, res, next) => {
 
 app.post('/api/Users/sign-in', async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { userName, passWord } = req.body;
     const sql = `
     select "UserID",
     "Password"
     from "Users"
-    where "Username" =$1 `;
-    const params = [username];
+    where "Username"=$1 `;
+    const params = [userName];
     const result = await db.query(sql, params);
     const users = result.rows[0];
     if (users !== undefined) {
-      const isMatching = await argon2.verify(users.Password, password);
+      const isMatching = await argon2.verify(users.Password, passWord);
       if (isMatching === true) {
         const payload = {
           userID: users.UserID,
-          username
+          userName
         };
         const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-        res.status(200).json({ payload, token });
+        res.status(200).json({ payload, token, message: 'Login successful' });
       } else {
         res.json({ message: 'Invalid Login' });
       }

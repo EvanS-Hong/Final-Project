@@ -60,9 +60,6 @@ export default function Users({isActive}) {
       const jsonData = await res.json();
       if (jsonData.message) {
         setMessage(jsonData.message);
-      } else {
-        setUsers(prev => users.concat(jsonData));
-        setMessage('Login successful');
       }
     } catch (err) {
       setError(err)

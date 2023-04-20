@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function SignInForm({onSubmit, statusMessage}) {
+export default function SignInForm({ onSubmit, statusMessage }) {
   const [passWord, setPassWord] = useState('');
   const [userName, setUserName] = useState('');
   const [text, setText] = useState('');
