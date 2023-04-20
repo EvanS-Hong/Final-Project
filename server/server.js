@@ -3,6 +3,7 @@ import express from 'express';
 import errorMiddleware from './lib/error-middleware.js';
 import pg from 'pg';
 import argon2 from 'argon2';
+import jwt from 'jsonwebtoken';
 
 // eslint-disable-next-line no-unused-vars -- Remove when used
 const db = new pg.Pool({
@@ -37,25 +38,56 @@ app.get('/api/Users', async (req, res, next) => {
   }
 });
 
-app.post('/api/Users', async (req, res, next) => {
+app.post('/api/Users/sign-up', async (req, res, next) => {
   try {
-    if (res.ok) {
-      const { userName, passWord } = req.body;
-      const hashedPassWord = await argon2.hash(passWord);
-      const params = [userName, hashedPassWord, 'user', 0, 0];
-      const sql = `
-      insert into "Users" ("Username", "Password", "Role", "Latitude", "Longitude")
-      values($1, $2, $3, $4, $5)
-      returning "UserID","Username";
-      `;
-      const results = await db.query(sql, params);
-      res.json(results.rows[0]);
-    }
+    const { userName, passWord } = req.body;
+    const hashedPassWord = await argon2.hash(passWord);
+    const params = [userName, hashedPassWord, 'user', 0, 0];
+    const sql = `
+    insert into "Users" ("Username", "Password", "Role", "Latitude", "Longitude")
+    values($1, $2, $3, $4, $5)
+    returning "UserID","Username";
+    `;
+    const results = await db.query(sql, params);
+    res.json(results.rows[0]);
   } catch (err) {
-    if (err.code === 23505) {
+    if (err.code === '23505') {
       console.log('hello');
       res.json({ message: 'User is Taken' });
-    } next(err);
+    } else {
+      next(err);
+    }
+  }
+});
+
+app.post('/api/Users/sign-in', async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+    const sql = `
+    select "UserID",
+    "Password"
+    from "Users"
+    where "Username" =$1 `;
+    const params = [username];
+    const result = await db.query(sql, params);
+    const users = result.rows[0];
+    if (users !== undefined) {
+      const isMatching = await argon2.verify(users.Password, password);
+      if (isMatching === true) {
+        const payload = {
+          userID: users.UserID,
+          username
+        };
+        const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+        res.status(200).json({ payload, token });
+      } else {
+        res.json({ message: 'Invalid Login' });
+      }
+    } else {
+      res.json({ message: 'Invalid Login' });
+    }
+  } catch (err) {
+    res.json({ message: 'Invalid Login' });
   }
 });
 

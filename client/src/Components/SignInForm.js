@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function SignUpForm({onSubmit, statusMessage}) {
+export default function SignInForm({onSubmit, statusMessage}) {
   const [passWord, setPassWord] = useState('');
   const [userName, setUserName] = useState('');
   const [text, setText] = useState('');
@@ -9,14 +9,12 @@ export default function SignUpForm({onSubmit, statusMessage}) {
   e.preventDefault();
     if (passWord === '' || userName === '') {
       setText('A username & password is required');
-    } else if (passWord.length < 8) {
-      setText('Your password is too short');
     } else {
-    const newUser = {
+    const user = {
       userName,
       passWord,
     };
-    onSubmit(newUser);
+    onSubmit(user);
     setText('');
   }
   }
@@ -40,7 +38,7 @@ export default function SignUpForm({onSubmit, statusMessage}) {
             value={passWord}
             onChange={e => setPassWord(e.target.value)} />
         </label>
-        <button type="submit"> Submit </button>
+        <button type="submit"> Sign In </button>
         <h1> {text} </h1>
         <h1> {statusMessage} </h1>
       </form>
