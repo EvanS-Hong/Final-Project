@@ -1,23 +1,22 @@
 import './App.css';
 import Users from './Components/Users';
 import { useState, useEffect } from 'react';
-// import './Components/form.css';
+import './Components/form.css';
 
 
 
 
 function App() {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState(undefined);
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [status, setStatus] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token')
     const user = localStorage.getItem('username')
-    if (!token !== null && user !== null) {
+    if (!token !== null && user !== undefined) {
       setUser(user);
       setIsAuthorized(true);
-      console.log('hello');
     }
   }, []);
 
@@ -25,6 +24,7 @@ function App() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     setIsAuthorized(false);
+    setUser(undefined);
   }
 
   function showLogin() {
@@ -34,8 +34,8 @@ function App() {
 if (isAuthorized === false) {
   return (
     <>
-      <img className='button' src="https://cdn-icons-png.flaticon.com/512/56/56763.png" alt="Menu button" />
-        <button onClick={showLogin}> Login </button>
+      <img className="button" src="https://cdn-icons-png.flaticon.com/512/56/56763.png" alt="Menu button" />
+        <button className="login" onClick={showLogin}> Login </button>
         <Users isActive={status}/>
     </>
   );
@@ -43,7 +43,7 @@ if (isAuthorized === false) {
   return (
     <>
       <img className='button' src="https://cdn-icons-png.flaticon.com/512/56/56763.png" alt="Menu button" />
-      <button onClick={handleSignOut}> Logout </button>
+      <button className="signout" onClick={handleSignOut}> Logout </button>
     </>
   )
   }

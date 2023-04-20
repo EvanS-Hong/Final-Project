@@ -60,12 +60,14 @@ export default function Users({isActive}) {
         body: JSON.stringify(user),
       })
       const jsonData = await res.json();
-      localStorage.setItem('token', jsonData.token);
-      localStorage.setItem('username', jsonData.payload.userName);
-      if (jsonData.message) {
-        setMessage('Login successful');
+      if (jsonData.message === 'Invalid Login') {
+      setMessage(jsonData.message);
+      } else {
+        // you can't store an object into local storage instead Stringify it
+        localStorage.setItem('token', jsonData.token);
+        localStorage.setItem('username', jsonData.payload.userName);
+        setTimeout(window.location.reload(), 3000);
       }
-      setTimeout(window.location.reload(), 3000);
     } catch (err) {
       setError(err)
     }
@@ -73,17 +75,19 @@ export default function Users({isActive}) {
 
 if (status === 'Signup' && isActive === true) {
   return (
-    <div className="Signup-Form">
-      <SignUpForm statusMessage={message} onSubmit={addUsers} />
-      <button onClick={() => setStatus('login')}> Go to login </button>
-    </div>
+      <div className="Signup-Form">
+        <h1> Login Here </h1>
+        <SignUpForm statusMessage={message} onSubmit={addUsers} />
+        <button className="movetologin" onClick={() => setStatus('login')}> Go to login </button>
+      </div>
   );
 } else if (status === 'login' && isActive === true) {
     return (
       <div className="Signin-Form">
+        <h1> Login Here </h1>
         <SignInForm statusMessage={message} onSubmit={verifyUser} />
         <p> Don't have an account?</p>
-        <button onClick={() => setStatus('Signup')}> Register </button>
+        <button className="signup" onClick={() => setStatus('Signup')}> Register </button>
       </div>
     );
   }

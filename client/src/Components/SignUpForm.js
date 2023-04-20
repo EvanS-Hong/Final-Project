@@ -27,6 +27,8 @@ export default function SignUpForm({ onSubmit, statusMessage }) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <h1> {text} </h1>
+        <h1> {statusMessage} </h1>
         <label>
           username
           <input
@@ -44,16 +46,14 @@ export default function SignUpForm({ onSubmit, statusMessage }) {
             onChange={e => setPassWord(e.target.value)} />
         </label>
         <label>
-          password
+          confirm password
           <input
             name='confirmPassWord'
             type='password'
             value={secondPassWord}
             onChange={e => setSecondPassWord(e.target.value)} />
         </label>
-        <button type="submit"> Sign Up </button>
-        <h1> {text} </h1>
-        <h1> {statusMessage} </h1>
+        <button className="register" type="submit"> Sign Up </button>
       </form>
     </div>
   )

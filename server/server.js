@@ -4,6 +4,7 @@ import errorMiddleware from './lib/error-middleware.js';
 import pg from 'pg';
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
+import ClientError from './lib/client-error.js';
 
 // eslint-disable-next-line no-unused-vars -- Remove when used
 const db = new pg.Pool({
@@ -71,21 +72,15 @@ app.post('/api/Users/sign-in', async (req, res, next) => {
     const params = [userName];
     const result = await db.query(sql, params);
     const users = result.rows[0];
-    if (users !== undefined) {
-      const isMatching = await argon2.verify(users.Password, passWord);
-      if (isMatching === true) {
-        const payload = {
-          userID: users.UserID,
-          userName
-        };
-        const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-        res.status(200).json({ payload, token, message: 'Login successful' });
-      } else {
-        res.json({ message: 'Invalid Login' });
-      }
-    } else {
-      res.json({ message: 'Invalid Login' });
-    }
+    if (!users) throw new ClientError(400);
+    const isMatching = await argon2.verify(users.Password, passWord);
+    if (isMatching === false) throw new ClientError(400);
+    const payload = {
+      userID: users.UserID,
+      userName
+    };
+    const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+    res.status(200).json({ payload, token });
   } catch (err) {
     res.json({ message: 'Invalid Login' });
   }

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './form.css';
 
 export default function SignInForm({ onSubmit, statusMessage }) {
   const [passWord, setPassWord] = useState('');
@@ -22,6 +23,8 @@ export default function SignInForm({ onSubmit, statusMessage }) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <h1> {text} </h1>
+        <h1> {statusMessage} </h1>
         <label>
           username
           <input
@@ -38,9 +41,8 @@ export default function SignInForm({ onSubmit, statusMessage }) {
             value={passWord}
             onChange={e => setPassWord(e.target.value)} />
         </label>
-        <button type="submit"> Sign In </button>
-        <h1> {text} </h1>
-        <h1> {statusMessage} </h1>
+        <button className ="submit" type="submit"> Sign In </button>
+
       </form>
     </div>
   )
