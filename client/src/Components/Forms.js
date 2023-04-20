@@ -4,7 +4,7 @@ import SignUpForm from './SignUpForm';
 import './form.css';
 
 
-export default function Users({isActive}) {
+export default function Forms({isActive}) {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState();
   const [message, setMessage] = useState('');
