@@ -1,31 +1,53 @@
-import { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Users from './Components/Users';
+import { useState, useEffect } from 'react';
+import './Components/form.css';
+
+
+
 
 function App() {
-  const [serverData, setServerData] = useState("");
+  const [user, setUser] = useState(undefined);
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [status, setStatus] = useState(false);
 
   useEffect(() => {
-    async function getServerData() {
-      const resp = await fetch('/api/hello');
-      const data = await resp.json();
-
-      console.log('Data from server:', data);
-
-      setServerData(data.message);
+    const token = localStorage.getItem('token')
+    const user = localStorage.getItem('username')
+    if (!token !== null && user !== undefined) {
+      setUser(user);
+      setIsAuthorized(true);
     }
-
-    getServerData();
   }, []);
 
+  function handleSignOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    setIsAuthorized(false);
+    setUser(undefined);
+  }
+
+  function showLogin() {
+    setStatus(!status);
+  }
+
+if (isAuthorized === false) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>{serverData}</h1>
-      </header>
-    </div>
+    <>
+      <img className="button" src="https://cdn-icons-png.flaticon.com/512/56/56763.png" alt="Menu button" />
+        <button className="login" onClick={showLogin}> Login </button>
+        <Users isActive={status}/>
+    </>
   );
+} else {
+  return (
+    <>
+      <img className='button' src="https://cdn-icons-png.flaticon.com/512/56/56763.png" alt="Menu button" />
+      <button className="signout" onClick={handleSignOut}> Logout </button>
+    </>
+  )
+  }
 }
+
 
 export default App;
