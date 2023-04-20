@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
+import './form.css';
+
 
 export default function Users({isActive}) {
   const [users, setUsers] = useState([]);
@@ -58,9 +60,12 @@ export default function Users({isActive}) {
         body: JSON.stringify(user),
       })
       const jsonData = await res.json();
+      localStorage.setItem('token', jsonData.token);
+      localStorage.setItem('username', jsonData.payload.userName);
       if (jsonData.message) {
-        setMessage(jsonData.message);
+        setMessage('Login successful');
       }
+      setTimeout(window.location.reload(), 3000);
     } catch (err) {
       setError(err)
     }
@@ -68,21 +73,18 @@ export default function Users({isActive}) {
 
 if (status === 'Signup' && isActive === true) {
   return (
-    <>
+    <div className="Signup-Form">
       <SignUpForm statusMessage={message} onSubmit={addUsers} />
-      <div>
-
-        <button onClick={() => setStatus('login')}> Go to login </button>
-      </div>
-      </>
+      <button onClick={() => setStatus('login')}> Go to login </button>
+    </div>
   );
 } else if (status === 'login' && isActive === true) {
     return (
-      <>
+      <div className="Signin-Form">
         <SignInForm statusMessage={message} onSubmit={verifyUser} />
         <p> Don't have an account?</p>
         <button onClick={() => setStatus('Signup')}> Register </button>
-      </>
+      </div>
     );
   }
 }

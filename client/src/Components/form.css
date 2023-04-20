@@ -1,0 +1,7 @@
+.Signin-Form {
+  display: flex;
+  justify-content: center;
+  margin-top: 40%;
+  width: 50%;
+  background-color: black;
+}
