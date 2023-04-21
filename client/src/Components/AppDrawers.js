@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import './AppDrawer.css';
 import Forms from './Forms';
 import './form.css';
+import { Link, Outlet } from "react-router-dom";
 
 export default function AppDrawer({ menuOptions }) {
   const [status, setStatus] = useState(false);
-  const [title, setTitle] = useState('');
 
   function handleActiveStatus() {
     setStatus(!status);
@@ -15,16 +15,15 @@ export default function AppDrawer({ menuOptions }) {
     handleActiveStatus();
   }
 
-  function showMenu(name) {
+  function showMenu() {
     handleActiveStatus();
-    setTitle(name);
+
   }
 
   return (
     <>
       <img className='button' onClick={handleActiveStatus} src="https://cdn-icons-png.flaticon.com/512/56/56763.png" alt="Menu button" />
       <CreateDrawerList CC={showMenu} customOnClick={handleDrawerStatus} activeStatus={status} menuOptions={menuOptions} />
-      <p> {title} </p>
     </>
   );
 }
@@ -34,13 +33,6 @@ export function CreateDrawerList({ menuOptions, activeStatus, customOnClick, CC 
   const [user, setUser] = useState(undefined);
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [status, setStatus] = useState(false);
-
-
-  const listItems = menuOptions.map(menuOptions =>
-    <li key={menuOptions.id}>
-      <button onClick={() => CC(menuOptions.name)}> {menuOptions.name} </button>
-    </li>
-  );
 
 
   useEffect(() => {
@@ -66,24 +58,31 @@ export function CreateDrawerList({ menuOptions, activeStatus, customOnClick, CC 
   if (activeStatus === true & isAuthorized === false) {
     return (
       <>
+        <Outlet />
         <div onClick={customOnClick} className='overlay'>
         </div>
         <div className='drawer'>
           <h2> menu </h2>
-          <ul> {listItems} </ul>
+          <ul>
+            <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
+          </ul>
           <button className="login" onClick={showLogin}> Login </button>
         </div>
         <Forms isActive={status} />
+
       </>
     );
   } else if (activeStatus === true & isAuthorized === true) {
     return (
       <>
+      <Outlet />
         <div onClick={customOnClick} className='overlay'>
         </div>
         <div className='drawer'>
           <h2> menu </h2>
-          <ul> {listItems} </ul>
+          <ul>
+            <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
+          </ul>
           <button className="signout" onClick={handleSignOut}> Logout </button>
         </div>
 

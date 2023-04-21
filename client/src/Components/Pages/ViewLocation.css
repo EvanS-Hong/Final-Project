@@ -1,0 +1,13 @@
+.map{
+  display: flex;
+  justify-content: center;
+  margin-top: 20%;
+}
+
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

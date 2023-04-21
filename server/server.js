@@ -53,7 +53,6 @@ app.post('/api/Users/sign-up', async (req, res, next) => {
     res.json(results.rows[0]);
   } catch (err) {
     if (err.code === '23505') {
-      console.log('hello');
       res.json({ message: 'User is Taken' });
     } else {
       next(err);
