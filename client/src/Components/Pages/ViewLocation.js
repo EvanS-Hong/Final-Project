@@ -1,11 +1,13 @@
 import React from 'react'
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import './ViewLocation.css';
+import Geocode from "react-geocode";
 
 
 export default function ViewLocation() {
   // const [latitude, setLatitude] = useState();
   // const [longitude, setLongitude] = useState();
+  Geocode.setApiKey("AIzaSyAA9yzP9GJ7dLzvbAD5ybpzCm1ImSy4TqA");
 
     const containerStyle = {
       width: '70vw',
