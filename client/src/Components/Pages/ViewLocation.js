@@ -7,6 +7,18 @@ import Geocode from "react-geocode";
 export default function ViewLocation() {
   // const [latitude, setLatitude] = useState();
   // const [longitude, setLongitude] = useState();
+  // const [location, setlocation] = useState(undefined);
+
+
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   if (location === undefined) {
+  //     setLatitude();
+  //     setLongitute();
+  // }
+
+
+
   Geocode.setApiKey("");
 
     const containerStyle = {
@@ -39,20 +51,34 @@ export default function ViewLocation() {
     }, [])
 
     return isLoaded ? (
-      <div className="map">
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={10}
-          onLoad={onLoad}
-          onUnmount={onUnmount}
-        >
-          <Marker
-            position={center}
-          />
-          { /* Child components, such as markers, info windows, etc. */}
-          <></>
-        </GoogleMap>
-      </div>
+      <>
+        {/* <form onSubmit={handleSubmit}>
+          <h1> {text} </h1>
+          <h1> {statusMessage} </h1>
+          <label>
+            username
+            <input
+              name="userName"
+              type="userName"
+              value={userName}
+              onChange={e => setUserName(e.target.value)} />
+          </label>
+        </form> */}
+        <div className="map">
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={10}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+          >
+            <Marker
+              position={center}
+            />
+            { /* Child components, such as markers, info windows, etc. */}
+            <></>
+          </GoogleMap>
+        </div>
+      </>
     ) : <></>
   }
