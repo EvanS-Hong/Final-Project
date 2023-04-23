@@ -7,7 +7,7 @@ import Geocode from "react-geocode";
 export default function ViewLocation() {
   // const [latitude, setLatitude] = useState();
   // const [longitude, setLongitude] = useState();
-  Geocode.setApiKey("AIzaSyAA9yzP9GJ7dLzvbAD5ybpzCm1ImSy4TqA");
+  Geocode.setApiKey("");
 
     const containerStyle = {
       width: '70vw',
@@ -21,7 +21,7 @@ export default function ViewLocation() {
 
     const { isLoaded } = useJsApiLoader({
       id: 'google-map-script',
-      googleMapsApiKey: "AIzaSyAA9yzP9GJ7dLzvbAD5ybpzCm1ImSy4TqA"
+      googleMapsApiKey: ""
     })
 
     const [map, setMap] = React.useState(null)
