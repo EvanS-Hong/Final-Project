@@ -1,12 +1,12 @@
 import { useEffect, useState, useMemo } from 'react'
 import React from 'react';
-import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import './ViewLocation.css';
 import usePlacesAutoComplete, {getGeocode, getLatLng } from 'use-places-autocomplete';
 
 
 export default function ViewLocation() {
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState({ lat: 35.6761919, lng: 139.6503106 });
   const libraries = useMemo(() => ['places'], []);
 
   useEffect(() => {
@@ -15,7 +15,6 @@ export default function ViewLocation() {
         const results = await getGeocode({ address });
         const { lat, lng } = await getLatLng(results[0]);
         setLocation({ lat, lng});
-        console.log(location);
       } catch(err) {
         console.error('Error!:', err);
       }
@@ -37,7 +36,9 @@ export default function ViewLocation() {
 
     const onLoad = React.useCallback(function callback(map) {
       const bounds = new window.google.maps.LatLngBounds(location);
+      const marker = new window.google.maps.Marker(location);
       map.fitBounds(bounds);
+
 
       setMap(map)
     }, [])
@@ -58,7 +59,7 @@ export default function ViewLocation() {
             onLoad={onLoad}
             onUnmount={onUnmount}
           >
-            <Marker position={location}/>
+            <MarkerF position={location} />
             { /* Child components, such as markers, info windows, etc. */}
           </GoogleMap>
         </div>
@@ -111,7 +112,7 @@ export default function ViewLocation() {
         onChange={e => setValue(e.target.value)}
         disabled={!ready}
         placeholder="Tokyo Japan" />
-          {status === "OK" && <ul>{renderSuggestions()}</ul>}
+          {status === "OK" && <ul className="list">{renderSuggestions()}</ul>}
       </div>
   );
 }
