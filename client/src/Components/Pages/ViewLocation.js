@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import React from 'react';
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import './ViewLocation.css';
@@ -6,9 +6,8 @@ import usePlacesAutoComplete, {getGeocode, getLatLng } from 'use-places-autocomp
 
 
 export default function ViewLocation() {
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
   const [location, setLocation] = useState('');
+  const libraries = useMemo(() => ['places'], []);
 
   useEffect(() => {
     async function displayLocation(address) {
@@ -16,13 +15,12 @@ export default function ViewLocation() {
         const results = await getGeocode({ address });
         const { lat, lng } = await getLatLng(results[0]);
         setLocation({ lat, lng});
-        setLatitude(lat);
-        setLongitude(lng);
+        console.log(location);
       } catch(err) {
         console.error('Error!:', err);
       }
     }
-  }, []);
+  }, [location]);
 
     const containerStyle = {
       width: '70vw',
@@ -31,7 +29,8 @@ export default function ViewLocation() {
 
     const { isLoaded } = useJsApiLoader({
       id: 'google-map-script',
-      googleMapsApiKey: "AIzaSyAA9yzP9GJ7dLzvbAD5ybpzCm1ImSy4TqA"
+      googleMapsApiKey: "AIzaSyAA9yzP9GJ7dLzvbAD5ybpzCm1ImSy4TqA",
+      libraries
     })
 
     const [map, setMap] = React.useState(null)
@@ -49,6 +48,7 @@ export default function ViewLocation() {
 
     return isLoaded ? (
       <>
+      <div className="container">
         <PlacesAutoComplete onSelect={(latLng, address) =>  setLocation(latLng)} />
         <div className="map">
           <GoogleMap
@@ -58,13 +58,11 @@ export default function ViewLocation() {
             onLoad={onLoad}
             onUnmount={onUnmount}
           >
-            <Marker
-              position={location}
-            />
+            <Marker position={location}/>
             { /* Child components, such as markers, info windows, etc. */}
-            <></>
           </GoogleMap>
         </div>
+      </div>
       </>
     ) : <></>
 }
@@ -79,26 +77,41 @@ export default function ViewLocation() {
       clearSuggestions
     } = usePlacesAutoComplete();
 
+    const renderSuggestions = () =>
+      data.map((suggestion) => {
+        const {
+          place_id,
+          structured_formatting: { main_text, secondary_text },
+        } = suggestion;
 
-  const handleSelect = async address => {
-    setValue(address, false);
-    clearSuggestions();
-    try {
-      const results = await getGeocode({ address });
-      const { lat, lng } = await getLatLng(results[0]);
-      onSelect({ lat, lng }, address);
-    } catch (err) {
-      console.error('Error:', err);
-    }
-  }
+        return (
+          <li key={place_id} onClick={handleSelect(suggestion)}>
+            <strong>{main_text}</strong> <small>{secondary_text}</small>
+          </li>
+        );
+      });
+
+    const handleSelect =
+      ({ description }) =>
+        () => {
+          setValue(description, false);
+          clearSuggestions();
+
+          // Get latitude and longitude via utility functions
+          getGeocode({ address: description }).then((results) => {
+            const { lat, lng } = getLatLng(results[0]);
+            onSelect({ lat, lng });
+          });
+        };
 
    return (
-      <form onSelect={handleSelect}>
+      <div className="selectBox" onSelect={handleSelect}>
         <input
         value={value}
         onChange={e => setValue(e.target.value)}
         disabled={!ready}
-        placeholder="placehere" />
-      </form>
+        placeholder="Tokyo Japan" />
+          {status === "OK" && <ul>{renderSuggestions()}</ul>}
+      </div>
   );
 }
