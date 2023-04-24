@@ -1,13 +1,14 @@
-import { useEffect, useState, React } from 'react'
+import { useEffect, useState } from 'react'
+import React from 'react';
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import './ViewLocation.css';
 import usePlacesAutoComplete, {getGeocode, getLatLng } from 'use-places-autocomplete';
 
 
 export default function ViewLocation() {
-  const [latitude, setLatitude] = useState(undefined);
-  const [longitude, setLongitude] = useState();
-  const [location, setLocation] = useState(undefined);
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+  const [location, setLocation] = useState('');
 
   useEffect(() => {
     async function displayLocation(address) {
@@ -36,7 +37,6 @@ export default function ViewLocation() {
     const [map, setMap] = React.useState(null)
 
     const onLoad = React.useCallback(function callback(map) {
-      // This is just an example of getting and using the map instance!!! don't just blindly copy!
       const bounds = new window.google.maps.LatLngBounds(location);
       map.fitBounds(bounds);
 
