@@ -36,7 +36,6 @@ export default function ViewLocation() {
 
     const onLoad = React.useCallback(function callback(map) {
       const bounds = new window.google.maps.LatLngBounds(location);
-      const marker = new window.google.maps.Marker(location);
       map.fitBounds(bounds);
 
 
@@ -60,7 +59,7 @@ export default function ViewLocation() {
             onUnmount={onUnmount}
           >
             <MarkerF position={location} />
-            { /* Child components, such as markers, info windows, etc. */}
+            {/* { //User MarkerF for react. Marker doesn't show} */}
           </GoogleMap>
         </div>
       </div>
