@@ -1,0 +1,34 @@
+.map{
+  display: flex;
+  justify-content: center;
+
+  z-index: 0;
+}
+
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.dul {
+ color: white;
+ background-color: #121212;
+}
+
+.selectBox {
+  background-color: #121212;
+}
+
+div.container {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin-left: 15%;
+}
+
+input::placeholder {
+  color: rgb(141, 138, 138);
+}
