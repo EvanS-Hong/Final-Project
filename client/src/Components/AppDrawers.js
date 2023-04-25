@@ -4,7 +4,7 @@ import Forms from './Forms';
 import './form.css';
 import { Link, Outlet } from "react-router-dom";
 
-export default function AppDrawer({ menuOptions }) {
+export default function AppDrawer() {
   const [status, setStatus] = useState(false);
 
   function handleActiveStatus() {
@@ -23,13 +23,13 @@ export default function AppDrawer({ menuOptions }) {
   return (
     <>
       <img className='button' onClick={handleActiveStatus} src="https://cdn-icons-png.flaticon.com/512/56/56763.png" alt="Menu button" />
-      <CreateDrawerList CC={showMenu} customOnClick={handleDrawerStatus} activeStatus={status} menuOptions={menuOptions} />
+      <CreateDrawerList CC={showMenu} customOnClick={handleDrawerStatus} activeStatus={status} />
     </>
   );
 }
 
 
-export function CreateDrawerList({ menuOptions, activeStatus, customOnClick, CC }) {
+export function CreateDrawerList({ activeStatus, customOnClick, CC }) {
   const [user, setUser] = useState(undefined);
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [status, setStatus] = useState(false);
@@ -65,6 +65,7 @@ export function CreateDrawerList({ menuOptions, activeStatus, customOnClick, CC 
           <h2> menu </h2>
           <ul>
             <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
+            <Link className='link' onClick={() => CC()} to="/AddLocation" > AddLocation </Link>
           </ul>
           <button className="login" onClick={showLogin}> Login </button>
         </div>
@@ -82,6 +83,7 @@ export function CreateDrawerList({ menuOptions, activeStatus, customOnClick, CC 
           <h2> menu </h2>
           <ul>
             <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
+            <Link className='link' onClick={() => CC()} to="/AddLocation" > AddLocation </Link>
           </ul>
           <button className="signout" onClick={handleSignOut}> Logout </button>
         </div>

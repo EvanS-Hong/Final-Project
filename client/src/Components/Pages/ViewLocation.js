@@ -5,7 +5,7 @@ import './ViewLocation.css';
 import usePlacesAutoComplete, {getGeocode, getLatLng } from 'use-places-autocomplete';
 
 
-export default function ViewLocation() {
+export default function ViewLocation({cc}) {
   const [location, setLocation] = useState({ lat: 35.6761919, lng: 139.6503106 });
   const libraries = useMemo(() => ['places'], []);
 
@@ -15,6 +15,7 @@ export default function ViewLocation() {
         const results = await getGeocode({ address });
         const { lat, lng } = await getLatLng(results[0]);
         setLocation({ lat, lng});
+        cc({location});
       } catch(err) {
         console.error('Error!:', err);
       }
