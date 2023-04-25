@@ -3,7 +3,7 @@ import './AppDrawer.css';
 import Forms from './Forms';
 import './form.css';
 import { Link, Outlet } from "react-router-dom";
-
+import AppAccordian from "./AppAccordian";
 export default function AppDrawer() {
   const [status, setStatus] = useState(false);
 
@@ -66,6 +66,7 @@ export function CreateDrawerList({ activeStatus, customOnClick, CC }) {
           <ul>
             <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
             <Link className='link' onClick={() => CC()} to="/AddLocation" > AddLocation </Link>
+            <AppAccordian />
           </ul>
           <button className="login" onClick={showLogin}> Login </button>
         </div>
@@ -84,6 +85,7 @@ export function CreateDrawerList({ activeStatus, customOnClick, CC }) {
           <ul>
             <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
             <Link className='link' onClick={() => CC()} to="/AddLocation" > AddLocation </Link>
+            <AppAccordian />
           </ul>
           <button className="signout" onClick={handleSignOut}> Logout </button>
         </div>

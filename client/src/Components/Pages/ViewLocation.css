@@ -31,3 +31,11 @@ input::placeholder {
   border: 1px solid #ccc;
   padding: 30;
 }
+
+.viewcontainer {
+  display: flex;
+  flex-direction:column;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 5%;
+}

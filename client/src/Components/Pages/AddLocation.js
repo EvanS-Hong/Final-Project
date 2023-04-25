@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import ViewLocation from './ViewLocation';
+import ViewLocationChild from '.././ViewLocationChild';
 import './ViewLocation.css';
 import './AddLocation.css';
 
@@ -41,9 +41,6 @@ export default function AddLocation() {
   }
 }
 
-  const cC = (location) => {
-    setCoordinates(location);
- };
 
   return (
     <>
@@ -77,15 +74,17 @@ export default function AddLocation() {
             </select>
           </label>
         </div>
-        <ViewLocation cC={(location) => setCoordinates(location)}/>
+        <ViewLocationChild cC={(location) => setCoordinates(location)}/>
         <label>
           Description
-          <input
+          <textarea
+            rows="9"
+            columns="8"
             className="description"
             name="Description"
             type="text"
             value={description}
-            onChange={e => setDescription(e.target.value)} />
+              onChange={e => setDescription(e.target.value)} />
         </label>
           <button className="submit" type="submit"> Save Location </button>
       </form>
