@@ -39,6 +39,20 @@ app.get('/api/Users', async (req, res, next) => {
   }
 });
 
+app.get('/api/Locations', async (req, res, next) => {
+  try {
+    const sql = `
+    select*
+      from "Locations"
+      order by "LocationID"
+      `;
+    const results = await db.query(sql);
+    res.json(results.rows);
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.post('/api/Users/sign-up', async (req, res, next) => {
   try {
     const { userName, passWord } = req.body;

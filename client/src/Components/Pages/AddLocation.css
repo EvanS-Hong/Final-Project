@@ -19,10 +19,6 @@ Select {
   padding-right: 2rem;
 }
 
-.description {
-  height: 8rem;
-}
-
 .submit {
   margin-top:1%;
   margin-left: 71%;
@@ -30,4 +26,11 @@ Select {
 
 .container {
   margin: 3% 0;
+}
+
+textarea {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.07);
+  font-size: 1.1rem;
+  font-weight: 300;
 }

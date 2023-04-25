@@ -5,7 +5,7 @@ import './ViewLocation.css';
 import usePlacesAutoComplete, {getGeocode, getLatLng } from 'use-places-autocomplete';
 
 
-export default function ViewLocation({cC}) {
+export default function ViewLocation() {
   const [location, setLocation] = useState({ lat: 35.6761919, lng: 139.6503106 });
   const libraries = useMemo(() => ['places'], []);
 
@@ -13,6 +13,9 @@ export default function ViewLocation({cC}) {
     async function displayLocation(address) {
       try {
         const results = await getGeocode({ address });
+        if (!results.ok) {
+          throw new Error(`error ${results.status}`);
+        }
         const { lat, lng } = await getLatLng(results[0]);
         setLocation({ lat, lng});
       } catch(err) {
@@ -20,10 +23,6 @@ export default function ViewLocation({cC}) {
       }
     }
   }, []);
-
-  useEffect(() => {
-    cC(location);
-  },[location])
 
     const containerStyle = {
       width: '70vw',
@@ -50,7 +49,7 @@ export default function ViewLocation({cC}) {
 
     return isLoaded ? (
       <>
-      <div className="container">
+      <div className="viewcontainer">
         <PlacesAutoComplete onSelect={(latLng, address) =>  setLocation(latLng)} />
         <div className="map">
           <GoogleMap
