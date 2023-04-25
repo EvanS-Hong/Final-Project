@@ -15,11 +15,11 @@ export default function Forms({isActive}) {
     async function getUsers() {
       try {
         const res = await fetch('/api/Users');
-        const jsonData = await res.json();
         if (!res.ok) {
           throw new Error(`error ${res.status}`);
         } else {
-          setUsers(jsonData);
+        const jsonData = await res.json();
+        setUsers(jsonData);
         }
       } catch (err) {
         setError(err);
@@ -38,6 +38,9 @@ export default function Forms({isActive}) {
         },
         body: JSON.stringify(newUser),
       })
+      if (!res.ok) {
+        throw new Error(`error ${res.status}`);
+      } else {
       const jsonData = await res.json();
       if (jsonData.message) {
         setMessage(jsonData.message);
@@ -45,6 +48,7 @@ export default function Forms({isActive}) {
         setUsers(prev => users.concat(jsonData));
         setMessage('Registration successful');
       }
+    }
     } catch (err) {
       setError(err)
     }
@@ -59,6 +63,9 @@ export default function Forms({isActive}) {
         },
         body: JSON.stringify(user),
       })
+      if (!res.ok) {
+        throw new Error(`error ${res.status}`);
+      } else {
       const jsonData = await res.json();
       if (jsonData.message === 'Invalid Login') {
       setMessage(jsonData.message);
@@ -68,6 +75,7 @@ export default function Forms({isActive}) {
         localStorage.setItem('username', jsonData.payload.userName);
         setTimeout(window.location.reload(), 3000);
       }
+    }
     } catch (err) {
       setError(err)
     }

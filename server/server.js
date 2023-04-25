@@ -85,6 +85,23 @@ app.post('/api/Users/sign-in', async (req, res, next) => {
   }
 });
 
+app.post('/api/Locations/add-location', async (req, res, next) => {
+  try {
+    const { lat, lng, locationName, description, region, country } = req.body;
+    console.log(req.body);
+    const params = [country, region, lat, lng, locationName, description];
+    const sql = `
+    insert into "Locations" ("Country", "Region", "Longitude", "Latitude", "Name", "Description")
+    values($1, $2, $3, $4, $5, $6)
+    returning *;
+    `;
+    const results = await db.query(sql, params);
+    res.json(results.rows[0]);
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

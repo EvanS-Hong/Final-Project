@@ -1,11 +1,11 @@
 import { useEffect, useState, useMemo } from 'react'
 import React from 'react';
-import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, MarkerF, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
 import './ViewLocation.css';
 import usePlacesAutoComplete, {getGeocode, getLatLng } from 'use-places-autocomplete';
 
 
-export default function ViewLocation() {
+export default function ViewLocation({cC}) {
   const [location, setLocation] = useState({ lat: 35.6761919, lng: 139.6503106 });
   const libraries = useMemo(() => ['places'], []);
 
@@ -19,7 +19,11 @@ export default function ViewLocation() {
         console.error('Error!:', err);
       }
     }
-  }, [location]);
+  }, []);
+
+  useEffect(() => {
+    cC(location);
+  },[location])
 
     const containerStyle = {
       width: '70vw',
@@ -37,8 +41,6 @@ export default function ViewLocation() {
     const onLoad = React.useCallback(function callback(map) {
       const bounds = new window.google.maps.LatLngBounds(location);
       map.fitBounds(bounds);
-
-
       setMap(map)
     }, [])
 
@@ -59,7 +61,7 @@ export default function ViewLocation() {
             onUnmount={onUnmount}
           >
             <MarkerF position={location} />
-            {/* { //User MarkerF for react. Marker doesn't show} */}
+            {/* Use MarkerF for react. Marker doesn't show} */}
           </GoogleMap>
         </div>
       </div>
