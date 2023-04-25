@@ -22,13 +22,12 @@ ul.list {
   background-color: #121212;
 }
 
-div.container {
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  margin-left: 15%;
-}
-
 input::placeholder {
   color: rgb(141, 138, 138);
+}
+
+.divStyle {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 30;
 }

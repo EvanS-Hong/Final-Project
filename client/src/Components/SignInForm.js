@@ -42,7 +42,6 @@ export default function SignInForm({ onSubmit, statusMessage }) {
             onChange={e => setPassWord(e.target.value)} />
         </label>
         <button className ="submit" type="submit"> Sign In </button>
-
       </form>
     </div>
   )
