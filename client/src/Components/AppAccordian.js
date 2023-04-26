@@ -4,17 +4,32 @@ import './AppAccordian.css'
 export default function AppAccordion() {
   const [index, setIndex] = useState(0);
   const [index2, setIndex2] = useState(0);
+  const [index3, setIndex3] = useState(0);
   const [locations, setLocations] = useState([]);
   const list = [
     { id: 1, name: "Japan" }
   ]
+  const regions = [
+    { id: 1, name: "Kohaku" },
+    { id: 2, name: "Kanto" },
+    { id: 3, name: "Chubu" },
+    { id: 4, name: "Kansai" },
+    { id: 5, name: "ChuGoku" }
+  ]
+
 
   function handleStatus(spot) {
     index === spot ? setIndex(0) : setIndex(spot);
   }
-function handleStatus2(spot) {
-  index2 === spot ? setIndex2(0) : setIndex2(spot);
-}
+
+  function handleStatus2(spot) {
+    index2 === spot ? setIndex2(0) : setIndex2(spot);
+  }
+
+  function handleStatus3(spot) {
+    index3 === spot ? setIndex3(0) : setIndex3(spot);
+    console.log('hi');
+  }
 
   useEffect(() => {
     async function getLocations() {
@@ -31,24 +46,34 @@ function handleStatus2(spot) {
       }
     }
     getLocations();
+    console.log(locations);
   }, []);
 
 
   return (
     <>
-      <AccordianMechanics spot2={index2} spot={index} customOnClick={handleStatus} CC2={handleStatus2} list={list} locations={locations} />
+      <AccordianMechanics regions={regions}spot={index} spot2={index2} spot3={index3} customOnClick={handleStatus} CC2={handleStatus2} CC3={handleStatus3} list={list} locations={locations} />
     </>
   )
 }
 
-export function AccordianMechanics({ list, customOnClick, spot, CC2, spot2, locations }) {
+export function AccordianMechanics({ list, customOnClick, spot, CC2, spot2, spot3, locations, CC3, regions}) {
 
 
-  const listRegions = locations.map(locations =>
+ const listlocations = locations.map(locations =>
     <li key={locations.LocationID}>
-      <button onclick={() => CC2(locations.LocationID)}> {locations.Name} </button>
+      <button> {locations.Name} </button>
     </li> )
 
+  const listRegions = regions.map(regions =>
+    <li key={regions.id} >
+      <ul>
+        <button onClick={() => CC3(regions.id)}> {regions.name} </button>
+        {regions.id === spot3 ? (
+          <ul> {listlocations} </ul>
+        ): undefined }
+      </ul>
+    </li> )
 
   const listItems = list.map(list =>
     <li key={list.id}>
