@@ -1,31 +1,24 @@
-import { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import AppDrawer from './Components/AppDrawers';
+import { Routes, Route } from "react-router-dom";
+import {useEffect, useState} from 'react';
+import ViewLocation from './Components/Pages/ViewLocation';
+import AddLocation from './Components/Pages/AddLocation';
+import SavedLocation from './Components/Pages/SavedLocation';
+
 
 function App() {
-  const [serverData, setServerData] = useState("");
-
-  useEffect(() => {
-    async function getServerData() {
-      const resp = await fetch('/api/hello');
-      const data = await resp.json();
-
-      console.log('Data from server:', data);
-
-      setServerData(data.message);
-    }
-
-    getServerData();
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>{serverData}</h1>
-      </header>
-    </div>
+    <>
+      <AppDrawer />
+      <Routes>
+        <Route path="ViewLocation" element={<ViewLocation />} />
+        <Route path="AddLocation" element={<AddLocation />} />
+        <Route path="SavedLocation" element={<SavedLocation /> } />
+      </Routes>
+
+    </>
   );
-}
+  }
 
 export default App;
