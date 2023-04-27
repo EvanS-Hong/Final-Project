@@ -1,7 +1,5 @@
 import { useState, useEffect, useMemo,} from 'react';
 import React from 'react';
-import ViewLocationChild from '.././ViewLocationChild';
-import './ViewLocation.css';
 import './SavedLocation.css';
 import { GoogleMap, MarkerF, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
 import './ViewLocation.css';
