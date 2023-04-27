@@ -86,7 +86,7 @@ export default function AddLocation() {
             value={description}
               onChange={e => setDescription(e.target.value)} />
         </label>
-          <button className="submit" type="submit"> Save Location </button>
+          <button className="form-submit" type="submit"> Save Location </button>
       </form>
     </div>
   </>

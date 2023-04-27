@@ -116,6 +116,28 @@ app.post('/api/Locations/add-location', async (req, res, next) => {
   }
 });
 
+app.put('/api/Locations/edit-location', async (req, res, next) => {
+  try {
+    const { lat, lng, locationName, description, region, country, locationID } = req.body;
+    console.log(req.body);
+    const params = [country, region, lat, lng, locationName, description, locationID];
+    const sql = `
+    update "Locations"
+    set "Country" = $1,
+        "Region" = $2,
+        "Latitude" = $3,
+        "Longitude" = $4,
+        "Name" = $5,
+        "Description" = $6
+    Where "LocationID" = $7;
+    `;
+    const results = await db.query(sql, params);
+    res.json(results.rows[0]);
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
