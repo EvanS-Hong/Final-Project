@@ -1,0 +1,36 @@
+.form-Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 70%;
+  margin-left: 15%;
+}
+
+.name-region {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+Select {
+  color: white;
+  background-color: #121212;
+  font-size: 1.2rem;
+  padding-right: 2rem;
+}
+
+.form-submit {
+  margin-top: 1%;
+  margin-left: 71%;
+}
+
+.container {
+  margin: 3% 0;
+}
+
+textarea {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.07);
+  font-size: 1.1rem;
+  font-weight: 300;
+}

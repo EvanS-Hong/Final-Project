@@ -25,7 +25,10 @@ export default function ViewLocationChild({ cC }) {
   }, []);
 
   useEffect(() => {
-    cC(location);
+    const savedLocation = localStorage.getItem('location');
+    (savedLocation !== undefined ? (
+      cC(savedLocation[0].Latitude, savedLocation[0].Longitude))
+      : cC(location) )
   }, [location])
 
   const containerStyle = {

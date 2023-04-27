@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './AppAccordian.css'
+import { Link, Outlet } from "react-router-dom";
 
 export default function AppAccordion() {
   const [index, setIndex] = useState(0);
@@ -10,7 +11,7 @@ export default function AppAccordion() {
     { id: 1, name: "Japan" }
   ]
   const regions = [
-    { id: 1, name: "Kohaku" },
+    { id: 1, name: "Tohoku" },
     { id: 2, name: "Kanto" },
     { id: 3, name: "Chubu" },
     { id: 4, name: "Kansai" },
@@ -57,6 +58,10 @@ export default function AppAccordion() {
 
 export function AccordianMechanics({ list, customOnClick, spot, CC2, spot2, spot3, locations, CC3, regions }) {
 
+ function saveData() {
+   localStorage.setItem('location', JSON.stringify(locations));
+ }
+
   const listRegions = regions.map(regions =>
     <li key={regions.id} >
       <ul>
@@ -66,7 +71,7 @@ export function AccordianMechanics({ list, customOnClick, spot, CC2, spot2, spot
             {locations.map(locations => {
               return locations.Region === regions.name ? (
                 <li key={locations.LocationID}>
-                  <button> {locations.Name} </button>
+                  <Link className='link' onClick={() => saveData()} to="/SavedLocation" > {locations.Name} </Link>
                 </li>
               ) : undefined
             })}
@@ -91,6 +96,7 @@ export function AccordianMechanics({ list, customOnClick, spot, CC2, spot2, spot
 
   return (
     <>
+    <Outlet />
       <div className='box'>
         <ul> {listItems} </ul>
       </div>
