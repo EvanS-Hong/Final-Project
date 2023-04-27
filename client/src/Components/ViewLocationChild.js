@@ -25,10 +25,7 @@ export default function ViewLocationChild({ cC }) {
   }, []);
 
   useEffect(() => {
-    const savedLocation = localStorage.getItem('location');
-    (savedLocation !== undefined ? (
-      cC(savedLocation[0].Latitude, savedLocation[0].Longitude))
-      : cC(location) )
+    cC(location);
   }, [location])
 
   const containerStyle = {
@@ -118,7 +115,7 @@ const PlacesAutoComplete = ({ onSelect }) => {
         value={value}
         onChange={e => setValue(e.target.value)}
         disabled={!ready}
-        placeholder="Tokyo Japan" />
+        placeholder="Search Location" />
       {status === "OK" && <ul className="list">{renderSuggestions()}</ul>}
     </div>
   );

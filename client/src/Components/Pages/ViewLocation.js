@@ -111,7 +111,7 @@ export default function ViewLocation() {
         value={value}
         onChange={e => setValue(e.target.value)}
         disabled={!ready}
-        placeholder="Tokyo Japan" />
+        placeholder="Search Location" />
           {status === "OK" && <ul className="list">{renderSuggestions()}</ul>}
       </div>
   );
