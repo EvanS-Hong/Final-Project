@@ -67,6 +67,7 @@ export function CreateDrawerList({ activeStatus, customOnClick, CC }) {
             <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
             <Link className='link' onClick={() => CC()} to="/AddLocation" > AddLocation </Link>
             <AppAccordian />
+            <Link className='link' onClick={() => CC()} to="/GroupLocation"> Locate my Group </Link>
           </ul>
           <button className="login" onClick={showLogin}> Login </button>
         </div>
