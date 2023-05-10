@@ -13,17 +13,18 @@ export default function SavedLocation() {
   const [region, setRegion] = useState('');
   const [country, setCountry] = useState('Japan');
   const [locationID, setlocationID] = useState(0);
-  let savedLocation = (JSON.parse(localStorage.getItem('location')))
   const { lat, lng } = coordinates;
+  let savedLocation = (JSON.parse(localStorage.getItem('location')))
 
   useEffect(() => {
-    setCoordinates(savedLocation[0].Latitude, savedLocation[0].Longitude);
-    setLocationName(savedLocation[0].Name);
-    setDescription(savedLocation[0].Description);
-    setRegion(savedLocation[0].Region);
-    setCountry(savedLocation[0].Country);
-    setlocationID(savedLocation[0].LocationID);
-},[]);
+    setCoordinates({lat: +savedLocation.Latitude, lng: +savedLocation.Longitude});
+    setLocationName(savedLocation.Name);
+    setDescription(savedLocation.Description);
+    setRegion(savedLocation.Region);
+    setCountry(savedLocation.Country);
+    setlocationID(savedLocation.LocationID);
+    console.log(savedLocation);
+  },[]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -110,13 +111,14 @@ export default function SavedLocation() {
   )
 }
 
- function ViewLocation() {
+ function ViewLocation({info}) {
   const [location, setLocation] = useState({ lat: 35.6761919, lng: 139.6503106 });
   const libraries = useMemo(() => ['places'], []);
 
+
   useEffect(() => {
     let savedLocation = (JSON.parse(localStorage.getItem('location')))
-    setLocation({lat: +savedLocation[0].Latitude, lng: +savedLocation[0].Longitude});
+    setLocation({lat: +savedLocation.Latitude, lng: +savedLocation.Longitude});
   }, []);
 
   const containerStyle = {
@@ -149,12 +151,13 @@ export default function SavedLocation() {
         <div className="map">
           <GoogleMap
             mapContainerStyle={containerStyle}
-            center={location}
+            center={info}
             zoom={10}
+            defaultCenter={location}
             onLoad={onLoad}
             onUnmount={onUnmount}
           >
-            <MarkerF position={location} />
+            <MarkerF position={info} />
             {/* Use MarkerF for react. Marker doesn't show} */}
           </GoogleMap>
         </div>

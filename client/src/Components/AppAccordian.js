@@ -58,20 +58,20 @@ export default function AppAccordion() {
 
 export function AccordianMechanics({ list, customOnClick, spot, CC2, spot2, spot3, locations, CC3, regions }) {
 
- function saveData() {
-   localStorage.setItem('location', JSON.stringify(locations));
+ function saveData(data) {
+   localStorage.setItem('location', JSON.stringify(data));
  }
 
   const listRegions = regions.map(regions =>
     <li key={regions.id} >
       <ul>
-        <button onClick={() => CC3(regions.id)}> {regions.name} </button>
+        <button className='region-button' onClick={() => CC3(regions.id)}> {regions.name} </button>
         {regions.id === spot3 ? (
           <ul>
             {locations.map(locations => {
               return locations.Region === regions.name ? (
                 <li key={locations.LocationID}>
-                  <Link className='link' onClick={() => saveData()} to="/SavedLocation" > {locations.Name} </Link>
+                  <Link className='link location' onClick={() => saveData(locations)} to="/SavedLocation" > {locations.Name} </Link>
                 </li>
               ) : undefined
             })}
@@ -86,7 +86,7 @@ export function AccordianMechanics({ list, customOnClick, spot, CC2, spot2, spot
       <button onClick={() => customOnClick(list.id)}> Saved Locations </button>
       {list.id === spot ? (
         <ul>
-          <button onClick={() => CC2(locations.locationID)}> Japan </button>
+          <button className='country-button' onClick={() => CC2(locations.locationID)}> Japan </button>
           {locations.locationID === spot2 ? (
             <ul> {listRegions} </ul>
           ) : undefined}

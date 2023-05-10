@@ -42,7 +42,7 @@ app.get('/api/Users', async (req, res, next) => {
 app.get('/api/Locations', async (req, res, next) => {
   try {
     const sql = `
-    select*
+    select *
       from "Locations"
       order by "LocationID"
       `;

@@ -4,6 +4,7 @@ import Forms from './Forms';
 import './form.css';
 import { Link, Outlet } from "react-router-dom";
 import AppAccordian from "./AppAccordian";
+
 export default function AppDrawer() {
   const [status, setStatus] = useState(false);
 
@@ -17,7 +18,6 @@ export default function AppDrawer() {
 
   function showMenu() {
     handleActiveStatus();
-
   }
 
   return (
@@ -27,7 +27,6 @@ export default function AppDrawer() {
     </>
   );
 }
-
 
 export function CreateDrawerList({ activeStatus, customOnClick, CC }) {
   const [user, setUser] = useState(undefined);
@@ -63,16 +62,19 @@ export function CreateDrawerList({ activeStatus, customOnClick, CC }) {
         </div>
         <div className='drawer'>
           <h2> menu </h2>
-          <ul>
-            <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
-            <Link className='link' onClick={() => CC()} to="/AddLocation" > AddLocation </Link>
-            <AppAccordian />
-            <Link className='link' onClick={() => CC()} to="/GroupLocation"> Locate my Group </Link>
-          </ul>
-          <button className="login" onClick={showLogin}> Login </button>
+          <div className='button-container'>
+            <ul>
+              <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
+              <Link className='link' onClick={() => CC()} to="/AddLocation" > AddLocation </Link>
+              <AppAccordian />
+              <Link className='link' onClick={() => CC()} to="/GroupLocation"> Locate my Group </Link>
+            </ul>
+          </div>
+          <div>
+           <button className="login" onClick={showLogin}> Login </button>
+          </div>
         </div>
         <Forms isActive={status} />
-
       </>
     );
   } else if (activeStatus === true & isAuthorized === true) {
@@ -83,14 +85,17 @@ export function CreateDrawerList({ activeStatus, customOnClick, CC }) {
         </div>
         <div className='drawer'>
           <h2> menu </h2>
-          <ul>
-            <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
-            <Link className='link' onClick={() => CC()} to="/AddLocation" > AddLocation </Link>
-            <AppAccordian />
-          </ul>
-          <button className="signout" onClick={handleSignOut}> Logout </button>
+          <div>
+            <ul className='button-container'>
+              <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
+              <Link className='link' onClick={() => CC()} to="/AddLocation" > AddLocation </Link>
+              <AppAccordian />
+            </ul>
+          </div>
+          <div>
+            <button className="signout" onClick={handleSignOut}> Logout </button>
+          </div>
         </div>
-
       </>
     );
 }
