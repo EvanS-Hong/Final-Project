@@ -14,7 +14,6 @@ export default function SignInForm({ onSubmit, statusMessage }) {
     const user = {
       userName,
       passWord,
-      // test comment
     };
     onSubmit(user);
     setText('');
