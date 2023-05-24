@@ -17,13 +17,16 @@ export default function SavedLocation() {
   let savedLocation = (JSON.parse(localStorage.getItem('location')))
 
   useEffect(() => {
+    if (locationName !== savedLocation.Name) {
+      console.log('hello');
+    }
+
     setCoordinates({lat: +savedLocation.Latitude, lng: +savedLocation.Longitude});
     setLocationName(savedLocation.Name);
     setDescription(savedLocation.Description);
     setRegion(savedLocation.Region);
     setCountry(savedLocation.Country);
     setlocationID(savedLocation.LocationID);
-    console.log(savedLocation);
   },[]);
 
   function handleSubmit(e) {
