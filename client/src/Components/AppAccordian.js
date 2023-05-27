@@ -51,12 +51,12 @@ export default function AppAccordion() {
 
   return (
     <>
-      <AccordianMechanics regions={regions} spot={index} spot2={index2} spot3={index3} customOnClick={handleStatus} CC2={handleStatus2} CC3={handleStatus3} list={list} locations={locations} />
+      <AccordianMechanics regions={regions} spot={index} spot2={index2} spot3={index3} onSavedLocationsClick={handleStatus} onRegionClick={handleStatus2} OnBookmarkedLocation={handleStatus3} list={list} locations={locations} />
     </>
   )
 }
 
-export function AccordianMechanics({ list, customOnClick, spot, CC2, spot2, spot3, locations, CC3, regions }) {
+export function AccordianMechanics({ list, onSavedLocationsClick, spot, onRegionClick, spot2, spot3, locations, OnBookmarkedLocation, regions }) {
 
  function saveData(data) {
    localStorage.setItem('location', JSON.stringify(data));
@@ -65,7 +65,7 @@ export function AccordianMechanics({ list, customOnClick, spot, CC2, spot2, spot
   const listRegions = regions.map(regions =>
     <li key={regions.id} >
       <ul>
-        <button className='region-button' onClick={() => CC3(regions.id)}> {regions.name} </button>
+        <button className='region-button' onClick={() => OnBookmarkedLocation(regions.id)}> {regions.name} </button>
         {regions.id === spot3 ? (
           <ul>
             {locations.map(locations => {
@@ -83,10 +83,10 @@ export function AccordianMechanics({ list, customOnClick, spot, CC2, spot2, spot
 
   const listItems = list.map(list =>
     <li key={list.id}>
-      <button onClick={() => customOnClick(list.id)}> Saved Locations </button>
+      <button onClick={() => onSavedLocationsClick(list.id)}> Saved Locations </button>
       {list.id === spot ? (
         <ul>
-          <button className='country-button' onClick={() => CC2(locations.locationID)}> Japan </button>
+          <button className='country-button' onClick={() => onRegionClick(locations.locationID)}> Japan </button>
           {locations.locationID === spot2 ? (
             <ul> {listRegions} </ul>
           ) : undefined}
