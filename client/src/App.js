@@ -17,7 +17,6 @@ function App() {
     });
   }, []);
 
-
   return (
     <>
       <AppDrawer />
@@ -27,7 +26,6 @@ function App() {
         <Route path="SavedLocation" element={<SavedLocation /> } />
         <Route path="GroupLocation" element={<GroupLocation /> } />
       </Routes>
-
     </>
   );
   }

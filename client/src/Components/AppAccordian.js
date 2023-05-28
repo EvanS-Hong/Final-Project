@@ -7,9 +7,11 @@ export default function AppAccordion() {
   const [index2, setIndex2] = useState(0);
   const [index3, setIndex3] = useState(0);
   const [locations, setLocations] = useState([]);
+
   const list = [
     { id: 1, name: "Japan" }
   ]
+
   const regions = [
     { id: 1, name: "Tohoku" },
     { id: 2, name: "Kanto" },
@@ -17,7 +19,6 @@ export default function AppAccordion() {
     { id: 4, name: "Kansai" },
     { id: 5, name: "ChuGoku" }
   ]
-
 
   function handleStatus(spot) {
     index === spot ? setIndex(0) : setIndex(spot);
@@ -47,7 +48,6 @@ export default function AppAccordion() {
     }
     getLocations();
   }, []);
-
 
   return (
     <>
@@ -79,7 +79,6 @@ export function AccordianMechanics({ list, onSavedLocationsClick, spot, onRegion
         ) : undefined}
       </ul>
     </li>)
-
 
   const listItems = list.map(list =>
     <li key={list.id}>
