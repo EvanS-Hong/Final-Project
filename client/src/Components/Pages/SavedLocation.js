@@ -17,16 +17,13 @@ export default function SavedLocation() {
   let savedLocation = (JSON.parse(localStorage.getItem('location')))
 
   useEffect(() => {
-    if (locationName !== savedLocation.Name) {
-      console.log('hello');
-    }
-
     setCoordinates({lat: +savedLocation.Latitude, lng: +savedLocation.Longitude});
     setLocationName(savedLocation.Name);
     setDescription(savedLocation.Description);
     setRegion(savedLocation.Region);
     setCountry(savedLocation.Country);
     setlocationID(savedLocation.LocationID);
+    // find a way to compare the saved data to the locally saved data and reload if needed.
   },[]);
 
   function handleSubmit(e) {
@@ -117,7 +114,6 @@ export default function SavedLocation() {
  function ViewLocation({info}) {
   const [location, setLocation] = useState({ lat: 35.6761919, lng: 139.6503106 });
   const libraries = useMemo(() => ['places'], []);
-
 
   useEffect(() => {
     let savedLocation = (JSON.parse(localStorage.getItem('location')))
