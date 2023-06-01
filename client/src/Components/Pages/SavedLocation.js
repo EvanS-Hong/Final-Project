@@ -23,7 +23,9 @@ export default function SavedLocation() {
     setRegion(savedLocation.Region);
     setCountry(savedLocation.Country);
     setlocationID(savedLocation.LocationID);
-    // find a way to compare the saved data to the locally saved data and reload if needed.
+    window.addEventListener('beforeunload', (() => {
+      localStorage.removeItem('route')
+    }))
   },[]);
 
   function handleSubmit(e) {

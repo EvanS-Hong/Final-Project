@@ -60,6 +60,12 @@ export function AccordianMechanics({ list, onSavedLocationsClick, spot, onRegion
 
  function saveData(data) {
    localStorage.setItem('location', JSON.stringify(data));
+   const route = (JSON.parse(localStorage.getItem('route')))
+   if (route == null) {
+    localStorage.setItem('route', JSON.stringify(data.Name))
+   } else if (route !== data.Name && route !== null) {
+    window.location.reload();
+   }
  }
 
   const listRegions = regions.map(regions =>

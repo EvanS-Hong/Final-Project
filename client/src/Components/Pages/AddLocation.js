@@ -41,7 +41,6 @@ export default function AddLocation() {
   }
 }
 
-
   return (
     <>
     <div className="form-Container">
@@ -59,7 +58,7 @@ export default function AddLocation() {
             Region
             <select name="regions"
             onChange={e => setRegion(e.target.value)}>
-              <option value='' selected disabled hidden> Select a Region </option>
+              <option value='Default' disabled> Select a Region </option>
               <option value="Tohoku">Tohoku </option>
               <option value="Kanto">Kanto </option>
               <option value="Chubu">Chubu </option>
