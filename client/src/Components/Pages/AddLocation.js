@@ -21,10 +21,10 @@ export default function AddLocation() {
       country,
       region,
     };
-    AddLocation(location);
+    addLocation(location);
   }
 
-  async function AddLocation(newLocation) {
+  async function addLocation(newLocation) {
   try {
     const res = await fetch('/api/Locations/add-location', {
       method: "Post",

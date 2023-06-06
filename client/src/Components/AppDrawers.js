@@ -3,7 +3,7 @@ import './AppDrawer.css';
 import Forms from './Forms';
 import './form.css';
 import { Link, Outlet } from "react-router-dom";
-import AppAccordian from "./AppAccordian";
+import AppAccordion from "./AppAccordion";
 
 export default function AppDrawer() {
   const [status, setStatus] = useState(false);
@@ -12,7 +12,7 @@ export default function AppDrawer() {
     setStatus(!status);
   }
 
-  function handleDrawerStatus(name) {
+  function handleDrawerStatus() {
     handleActiveStatus();
   }
 
@@ -23,12 +23,12 @@ export default function AppDrawer() {
   return (
     <>
       <img className='button' onClick={handleActiveStatus} src="https://cdn-icons-png.flaticon.com/512/56/56763.png" alt="Menu button" />
-      <CreateDrawerList CC={showMenu} customOnClick={handleDrawerStatus} activeStatus={status} />
+      <DrawerList CC={showMenu} customOnClick={handleDrawerStatus} activeStatus={status} />
     </>
   );
 }
 
-export function CreateDrawerList({ activeStatus, customOnClick, CC }) {
+function DrawerList({ activeStatus, customOnClick, CC }) {
   const [user, setUser] = useState(undefined);
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [status, setStatus] = useState(false);
@@ -54,10 +54,9 @@ export function CreateDrawerList({ activeStatus, customOnClick, CC }) {
     setStatus(!status);
   }
 
-  if (activeStatus === true & isAuthorized === false) {
+  if (activeStatus && isAuthorized === false) {
     return (
       <>
-        <Outlet />
         <div onClick={customOnClick} className='overlay'>
         </div>
         <div className='drawer'>
@@ -66,7 +65,7 @@ export function CreateDrawerList({ activeStatus, customOnClick, CC }) {
             <ul>
               <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
               <Link className='link' onClick={() => CC()} to="/AddLocation" > AddLocation </Link>
-              <AppAccordian />
+              <AppAccordion />
               <Link className='link' onClick={() => CC()} to="/GroupLocation"> Locate my Group </Link>
             </ul>
           </div>
@@ -77,7 +76,7 @@ export function CreateDrawerList({ activeStatus, customOnClick, CC }) {
         <Forms isActive={status} />
       </>
     );
-  } else if (activeStatus === true & isAuthorized === true) {
+  } else if (activeStatus & isAuthorized ) {
     return (
       <>
       <Outlet />
@@ -89,7 +88,7 @@ export function CreateDrawerList({ activeStatus, customOnClick, CC }) {
             <ul className='button-container'>
               <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
               <Link className='link' onClick={() => CC()} to="/AddLocation" > AddLocation </Link>
-              <AppAccordian />
+              <AppAccordion />
             </ul>
           </div>
           <div>

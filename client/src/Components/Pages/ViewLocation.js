@@ -20,8 +20,7 @@ export default function ViewLocation() {
         setLocation({ lat, lng});
       } catch(err) {
         console.error('Error!:', err);
-      }
-    }
+      }    }
   }, []);
 
     const containerStyle = {

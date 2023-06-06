@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './AppAccordian.css'
+import './AppAccordion.css'
 import { Link, Outlet } from "react-router-dom";
 
 export default function AppAccordion() {
@@ -56,7 +56,7 @@ export default function AppAccordion() {
   )
 }
 
-export function AccordianMechanics({ list, onSavedLocationsClick, spot, onRegionClick, spot2, spot3, locations, OnBookmarkedLocation, regions }) {
+function AccordianMechanics({ list, onSavedLocationsClick, spot, onRegionClick, spot2, spot3, locations, OnBookmarkedLocation, regions }) {
 
  function saveData(data) {
    localStorage.setItem('location', JSON.stringify(data));
@@ -91,7 +91,7 @@ export function AccordianMechanics({ list, onSavedLocationsClick, spot, onRegion
       <button onClick={() => onSavedLocationsClick(list.id)}> Saved Locations </button>
       {list.id === spot ? (
         <ul>
-          <button className='country-button' onClick={() => onRegionClick(locations.locationID)}> Japan </button>
+          <button className='country-button' onClick={() => onRegionClick(locations.locationID)}> {list.name} </button>
           {locations.locationID === spot2 ? (
             <ul> {listRegions} </ul>
           ) : undefined}
