@@ -114,15 +114,11 @@ export default function SavedLocation() {
 }
 
  function ViewLocation({info}) {
-  const [location, setLocation] = useState({ lat: 35.6761919, lng: 139.6503106 });
-  const libraries = useMemo(() => ['places'], []);
+  const savedLocation = (JSON.parse(localStorage.getItem('location')))
+  const [location, setLocation] = useState({ lat: +savedLocation.Latitude, lng: +savedLocation.Longitude });
 
-  useEffect(() => {
-    let savedLocation = (JSON.parse(localStorage.getItem('location')))
-    setLocation({lat: +savedLocation.Latitude, lng: +savedLocation.Longitude});
-    console.log(savedLocation);
-  }, []);
 
+const libraries = useMemo(() => ['places'], []);
   const containerStyle = {
     width: '70vw',
     height: '70vh'
