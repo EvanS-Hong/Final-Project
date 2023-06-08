@@ -12,6 +12,7 @@ export default function AddLocation() {
   const { lat, lng } = coordinates;
 
  function handleSubmit(e) {
+
     e.preventDefault();
     const location = {
       lat,
@@ -21,7 +22,7 @@ export default function AddLocation() {
       country,
       region,
     };
-    addLocation(location);
+     addLocation(location);
   }
 
   async function addLocation(newLocation) {
@@ -58,7 +59,7 @@ export default function AddLocation() {
             Region
             <select name="regions"
             onChange={e => setRegion(e.target.value)}>
-              <option value='Default' disabled> Select a Region </option>
+              <option selected disabled> Select a Region </option>
               <option value="Tohoku">Tohoku </option>
               <option value="Kanto">Kanto </option>
               <option value="Chubu">Chubu </option>

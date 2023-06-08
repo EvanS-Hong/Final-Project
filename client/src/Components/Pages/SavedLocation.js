@@ -94,7 +94,7 @@ export default function SavedLocation() {
               </select>
             </label>
           </div>
-          <ViewLocation info={coordinates}/>
+          <ViewLocation />
           <label>
             Description
             <textarea
@@ -120,6 +120,7 @@ export default function SavedLocation() {
   useEffect(() => {
     let savedLocation = (JSON.parse(localStorage.getItem('location')))
     setLocation({lat: +savedLocation.Latitude, lng: +savedLocation.Longitude});
+    console.log(savedLocation);
   }, []);
 
   const containerStyle = {
@@ -152,13 +153,13 @@ export default function SavedLocation() {
         <div className="map">
           <GoogleMap
             mapContainerStyle={containerStyle}
-            center={info}
+            center={location}
             zoom={10}
             defaultCenter={location}
             onLoad={onLoad}
             onUnmount={onUnmount}
           >
-            <MarkerF position={info} />
+            <MarkerF position={location} />
             {/* Use MarkerF for react. Marker doesn't show} */}
           </GoogleMap>
         </div>

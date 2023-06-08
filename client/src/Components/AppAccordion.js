@@ -63,8 +63,9 @@ function AccordianMechanics({ list, onSavedLocationsClick, spot, onRegionClick, 
    const route = (JSON.parse(localStorage.getItem('route')))
    if (route == null) {
     localStorage.setItem('route', JSON.stringify(data.Name))
-   } else if (route !== data.Name && route !== null) {
+   } else if (route !== data.Name) {
     window.location.reload();
+    localStorage.setItem('route', JSON.stringify(data.Name))
    }
  }
 
