@@ -113,7 +113,7 @@ export default function SavedLocation() {
   )
 }
 
- function ViewLocation({info}) {
+ function ViewLocation() {
   const savedLocation = (JSON.parse(localStorage.getItem('location')))
   const [location, setLocation] = useState({ lat: +savedLocation.Latitude, lng: +savedLocation.Longitude });
 
