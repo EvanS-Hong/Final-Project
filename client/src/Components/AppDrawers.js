@@ -66,7 +66,7 @@ function DrawerList({ activeStatus, customOnClick, CC }) {
               <Link className='link' onClick={() => CC()} to="/ViewLocation" > ViewLocation </Link>
               <Link className='link' onClick={() => CC()} to="/AddLocation" > AddLocation </Link>
               <AppAccordion />
-              <Link className='link' onClick={() => CC()} to="/GroupLocation"> Locate my Group </Link>
+              {/* <Link className='link' onClick={() => CC()} to="/GroupLocation"> Locate my Group </Link> */}
             </ul>
           </div>
           <div>
