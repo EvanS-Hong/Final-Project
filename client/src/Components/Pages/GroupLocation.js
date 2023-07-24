@@ -27,18 +27,19 @@ export default function GroupLocation() {
   }, []);
 
   useEffect(() => {
-    const coors = (JSON.parse(localStorage.getItem('coordinates')));
-    setLocation(coors);
-    function saveCoors() {
-      const coors = (JSON.parse(localStorage.getItem('coordinates')));
-      setLocation(coors);
+    async function displayLocation(address) {
+      try {
+        const results = await getGeocode({ address });
+        if (!results.ok) {
+          throw new Error(`error ${results.status}`);
+        }
+        const { lat, lng } = await getLatLng(results[0]);
+        setLocation({ lat, lng });
+      } catch (err) {
+        console.error('Error!:', err);
+      }
     }
-    const autoSave = setInterval(saveCoors, 300000)
-    return () => {
-      clearInterval(autoSave);
-    }
-  },[]);
-
+  }, []);
 
   const containerStyle = {
     width: '70vw',
@@ -47,7 +48,8 @@ export default function GroupLocation() {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyAHFRZ7n1y4ngh9aS4kj2HpOzEzjOBBUjg"
+    googleMapsApiKey: "AIzaSyAHFRZ7n1y4ngh9aS4kj2HpOzEzjOBBUjg",
+    libraries
   })
 
   const [map, setMap] = React.useState(null)
@@ -61,6 +63,7 @@ export default function GroupLocation() {
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null)
   }, [])
+
 
   return isLoaded ? (
     <>

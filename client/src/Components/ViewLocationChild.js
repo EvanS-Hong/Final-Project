@@ -35,7 +35,7 @@ export default function ViewLocationChild({ cC }) {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyAA9yzP9GJ7dLzvbAD5ybpzCm1ImSy4TqA",
+    googleMapsApiKey: "AIzaSyAHFRZ7n1y4ngh9aS4kj2HpOzEzjOBBUjg",
     libraries
   })
 

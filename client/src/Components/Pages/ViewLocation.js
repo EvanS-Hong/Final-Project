@@ -7,6 +7,7 @@ import usePlacesAutoComplete, {getGeocode, getLatLng } from 'use-places-autocomp
 
 export default function ViewLocation() {
   const [location, setLocation] = useState({ lat: 35.6761919, lng: 139.6503106 });
+  console.log(location);
   const libraries = useMemo(() => ['places'], []);
 
   useEffect(() => {

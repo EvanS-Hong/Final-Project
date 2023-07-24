@@ -114,9 +114,10 @@ export default function SavedLocation() {
 }
 
  function ViewLocation() {
-  const savedLocation = (JSON.parse(localStorage.getItem('location')))
-  const [location, setLocation] = useState({ lat: +savedLocation.Latitude, lng: +savedLocation.Longitude });
-
+  // const savedLocation = (JSON.parse(localStorage.getItem('location')))
+  //  const newCoor = { Lat: +savedLocation.Latitude, Lng: +savedLocation.Longitude }
+  // const [location, setLocation] = useState(newCoor);
+   const [location, setLocation] = useState({ lat: 35.0072788, lng: 135.7708108})
 
 const libraries = useMemo(() => ['places'], []);
   const containerStyle = {
@@ -126,7 +127,7 @@ const libraries = useMemo(() => ['places'], []);
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyAA9yzP9GJ7dLzvbAD5ybpzCm1ImSy4TqA",
+    googleMapsApiKey: "AIzaSyAHFRZ7n1y4ngh9aS4kj2HpOzEzjOBBUjg",
     libraries
   })
 
@@ -151,7 +152,6 @@ const libraries = useMemo(() => ['places'], []);
             mapContainerStyle={containerStyle}
             center={location}
             zoom={10}
-            defaultCenter={location}
             onLoad={onLoad}
             onUnmount={onUnmount}
           >
