@@ -115,12 +115,7 @@ export default function SavedLocation() {
 
  function ViewLocation() {
   const savedLocation = (JSON.parse(localStorage.getItem('location')))
-   const newCoor = { lat: +savedLocation.Latitude, lng: +savedLocation.Longitude }
-  const [location, setLocation] = useState(newCoor);
-  //  const [location, setLocation] = useState({ lat: 35.0072788, lng: 135.7708108})
-
-  console.log("this is saved location:", savedLocation);
-  console.log("this is newCoor:", newCoor);
+  const [location, setLocation] = useState({ lat: +savedLocation.Latitude, lng: +savedLocation.Longitude });
 
 const libraries = useMemo(() => ['places'], []);
   const containerStyle = {
