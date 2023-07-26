@@ -53,19 +53,20 @@ export default function AddLocation() {
             name="locationName"
             type="text"
             value={locationName}
+            required
             onChange={e => setLocationName(e.target.value)} />
           </label>
           <label className="region">
             Region
-            <select name="regions"
-            onChange={e => setRegion(e.target.value)}>
-              <option selected disabled> Select a Region </option>
+              <select name="regions"
+            onChange={e => setRegion(e.target.value)} required>
+              <option selected disabled required> Select a Region </option>
               <option value="Tohoku">Tohoku </option>
               <option value="Kanto">Kanto </option>
               <option value="Chubu">Chubu </option>
               <option value="Kansai">Kansai </option>
               <option value="ChuGoku">ChuGoku </option>
-            </select>
+            required</select>
           </label>
           <label className="Country">
             Country
