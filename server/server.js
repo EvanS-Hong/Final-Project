@@ -105,7 +105,7 @@ app.post('/api/Locations/add-location', async (req, res, next) => {
     console.log(req.body);
     const params = [country, region, lat, lng, locationName, description];
     const sql = `
-    insert into "Locations" ("Country", "Region", "Longitude", "Latitude", "Name", "Description")
+    insert into "Locations" ("Country", "Region", "Latitude", "Longitude", "Name", "Description")
     values($1, $2, $3, $4, $5, $6)
     returning *;
     `;
