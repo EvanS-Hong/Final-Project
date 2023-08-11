@@ -12,6 +12,7 @@ export default function AddLocation() {
   const { lat, lng } = coordinates;
 
  function handleSubmit(e) {
+
     e.preventDefault();
     const location = {
       lat,
@@ -21,10 +22,10 @@ export default function AddLocation() {
       country,
       region,
     };
-    AddLocation(location);
+     addLocation(location);
   }
 
-  async function AddLocation(newLocation) {
+  async function addLocation(newLocation) {
   try {
     const res = await fetch('/api/Locations/add-location', {
       method: "Post",
@@ -41,7 +42,6 @@ export default function AddLocation() {
   }
 }
 
-
   return (
     <>
     <div className="form-Container">
@@ -53,18 +53,20 @@ export default function AddLocation() {
             name="locationName"
             type="text"
             value={locationName}
+            required
             onChange={e => setLocationName(e.target.value)} />
           </label>
           <label className="region">
             Region
-            <select name="regions"
-            onChange={e => setRegion(e.target.value)}>
+              <select name="regions"
+            onChange={e => setRegion(e.target.value)} required>
+              <option selected disabled required> Select a Region </option>
               <option value="Tohoku">Tohoku </option>
               <option value="Kanto">Kanto </option>
               <option value="Chubu">Chubu </option>
               <option value="Kansai">Kansai </option>
               <option value="ChuGoku">ChuGoku </option>
-            </select>
+            required</select>
           </label>
           <label className="Country">
             Country

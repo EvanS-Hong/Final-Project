@@ -7,6 +7,7 @@ import usePlacesAutoComplete, {getGeocode, getLatLng } from 'use-places-autocomp
 
 export default function ViewLocation() {
   const [location, setLocation] = useState({ lat: 35.6761919, lng: 139.6503106 });
+  console.log(location);
   const libraries = useMemo(() => ['places'], []);
 
   useEffect(() => {
@@ -20,8 +21,7 @@ export default function ViewLocation() {
         setLocation({ lat, lng});
       } catch(err) {
         console.error('Error!:', err);
-      }
-    }
+      }    }
   }, []);
 
     const containerStyle = {
@@ -31,7 +31,7 @@ export default function ViewLocation() {
 
     const { isLoaded } = useJsApiLoader({
       id: 'google-map-script',
-      googleMapsApiKey: "AIzaSyAA9yzP9GJ7dLzvbAD5ybpzCm1ImSy4TqA",
+      googleMapsApiKey: "AIzaSyAHFRZ7n1y4ngh9aS4kj2HpOzEzjOBBUjg",
       libraries
     })
 

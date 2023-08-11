@@ -1,0 +1,85 @@
+li {
+  list-style: none;
+}
+
+.login,
+.signout {
+  border: solid black 2px;
+  width: 30%;
+  font-size: 2rem;
+  padding: 4px 0px 4px;
+  cursor: pointer;
+  background-color: #292929;
+}
+
+p {
+  border: solid black 2px;
+  margin: 0%;
+  padding: 3px 3px 7px 5px;
+}
+
+.box {
+  width: 130%;
+  margin-left: -2%;
+}
+
+a {
+  border: none;
+  width: 100%;
+  font-size: 1.3rem;
+  text-align: left;
+  padding: 5%;
+  background-color: #292929;
+  text-decoration: none;
+}
+
+a:hover {
+background-color: #1F1F1F;
+}
+
+.country-button {
+  border:none;
+  font-size: 2rem;
+  padding: 4px 0px 4px;
+  cursor: pointer;
+  background-color: #292929;
+  margin-left: -45%;
+}
+
+.country-button:hover {
+  background-color: #1F1F1F;
+}
+
+.region-button {
+  border: none;
+  font-size: 1.7rem;
+  padding: 4px 0px 4px;
+  cursor: pointer;
+  background-color: #292929;
+  margin-left: -30%;
+}
+
+.region-button:hover {
+  background-color: #1F1F1F;
+}
+
+.location {
+  border: none;
+  font-size: 1.3rem;
+  padding: 4px 0px 4px;
+  cursor: pointer;
+  background-color: #292929;
+  margin-left: 30%;
+}
+
+.location:hover {
+  background-color: #1F1F1F;
+}
+
+ul > a {
+  font-size: 2rem;
+}
+
+li > button {
+  font-size: 2rem;
+}

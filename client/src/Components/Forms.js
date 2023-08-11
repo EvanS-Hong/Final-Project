@@ -45,7 +45,7 @@ export default function Forms({isActive}) {
       if (jsonData.message) {
         setMessage(jsonData.message);
       } else {
-        setUsers(prev => users.concat(jsonData));
+        setUsers(users.concat(jsonData));
         setMessage('Registration successful');
       }
     }

@@ -20,6 +20,8 @@ ul.list {
 
 .selectBox {
   background-color: #121212;
+  width: 70%;
+  margin-left: 14.7%;
 }
 
 input::placeholder {

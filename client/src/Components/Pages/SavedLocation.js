@@ -13,17 +13,20 @@ export default function SavedLocation() {
   const [region, setRegion] = useState('');
   const [country, setCountry] = useState('Japan');
   const [locationID, setlocationID] = useState(0);
-  let savedLocation = (JSON.parse(localStorage.getItem('location')))
   const { lat, lng } = coordinates;
+  let savedLocation = (JSON.parse(localStorage.getItem('location')))
 
   useEffect(() => {
-    setCoordinates(savedLocation[0].Latitude, savedLocation[0].Longitude);
-    setLocationName(savedLocation[0].Name);
-    setDescription(savedLocation[0].Description);
-    setRegion(savedLocation[0].Region);
-    setCountry(savedLocation[0].Country);
-    setlocationID(savedLocation[0].LocationID);
-},[]);
+    setCoordinates({lat: +savedLocation.Latitude, lng: +savedLocation.Longitude});
+    setLocationName(savedLocation.Name);
+    setDescription(savedLocation.Description);
+    setRegion(savedLocation.Region);
+    setCountry(savedLocation.Country);
+    setlocationID(savedLocation.LocationID);
+    window.addEventListener('beforeunload', (() => {
+      localStorage.removeItem('route')
+    }))
+  },[]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -91,7 +94,7 @@ export default function SavedLocation() {
               </select>
             </label>
           </div>
-          <ViewLocation info={coordinates}/>
+          <ViewLocation />
           <label>
             Description
             <textarea
@@ -111,14 +114,10 @@ export default function SavedLocation() {
 }
 
  function ViewLocation() {
-  const [location, setLocation] = useState({ lat: 35.6761919, lng: 139.6503106 });
-  const libraries = useMemo(() => ['places'], []);
+  const savedLocation = (JSON.parse(localStorage.getItem('location')))
+  const [location, setLocation] = useState({ lat: +savedLocation.Latitude, lng: +savedLocation.Longitude });
 
-  useEffect(() => {
-    let savedLocation = (JSON.parse(localStorage.getItem('location')))
-    setLocation({lat: +savedLocation[0].Latitude, lng: +savedLocation[0].Longitude});
-  }, []);
-
+const libraries = useMemo(() => ['places'], []);
   const containerStyle = {
     width: '70vw',
     height: '70vh'
@@ -126,7 +125,7 @@ export default function SavedLocation() {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyAA9yzP9GJ7dLzvbAD5ybpzCm1ImSy4TqA",
+    googleMapsApiKey: "AIzaSyAHFRZ7n1y4ngh9aS4kj2HpOzEzjOBBUjg",
     libraries
   })
 
