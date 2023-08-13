@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import ViewLocationChild from '.././ViewLocationChild';
-import './ViewLocation.css';
 import './AddLocation.css';
 
 export default function AddLocation() {

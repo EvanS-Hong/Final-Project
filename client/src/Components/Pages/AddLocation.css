@@ -1,16 +1,3 @@
-.form-Container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 70%;
-  margin-left: 15%;
-}
-
-.name-region {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 Select {
   color: white;
@@ -22,10 +9,6 @@ Select {
 .form-submit {
   margin-top:1%;
   margin-left: 71%;
-}
-
-.container {
-  margin: 3% 0;
 }
 
 textarea {

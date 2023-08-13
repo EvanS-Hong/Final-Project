@@ -1,13 +1,12 @@
 import { useEffect, useState, useMemo } from 'react'
 import React from 'react';
-import { GoogleMap, MarkerF, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import './ViewLocation.css';
 import usePlacesAutoComplete, {getGeocode, getLatLng } from 'use-places-autocomplete';
 
 
 export default function ViewLocation() {
   const [location, setLocation] = useState({ lat: 35.6761919, lng: 139.6503106 });
-  console.log(location);
   const libraries = useMemo(() => ['places'], []);
 
   useEffect(() => {
@@ -49,19 +48,21 @@ export default function ViewLocation() {
 
     return isLoaded ? (
       <>
-      <div className="viewcontainer">
-        <PlacesAutoComplete onSelect={(latLng, address) =>  setLocation(latLng)} />
-        <div className="map">
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={location}
-            zoom={10}
-            onLoad={onLoad}
-            onUnmount={onUnmount}
-          >
-            <MarkerF position={location} />
-            {/* Use MarkerF for react. Marker doesn't show} */}
-          </GoogleMap>
+      <div className="container">
+        <div className="viewcontainer">
+          <PlacesAutoComplete className="selectbox" onSelect={(latLng, address) =>  setLocation(latLng)} />
+          <div className="map">
+            <GoogleMap
+              mapContainerStyle={containerStyle}
+              center={location}
+              zoom={10}
+              onLoad={onLoad}
+              onUnmount={onUnmount}
+            >
+              <MarkerF position={location} />
+              {/* Use MarkerF for react. Marker doesn't show} */}
+            </GoogleMap>
+          </div>
         </div>
       </div>
       </>
