@@ -27,6 +27,7 @@ export default function ViewLocationChild({ cC }) {
   useEffect(() => {
     cC(location);
   }, [location])
+  // this exists from the first viewloaction.js because having this use effect breaks the original use
 
   const containerStyle = {
     width: '70vw',
