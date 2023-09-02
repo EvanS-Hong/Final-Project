@@ -116,6 +116,7 @@ export default function SavedLocation() {
  function ViewLocation() {
   const savedLocation = (JSON.parse(localStorage.getItem('location')))
   const [location, setLocation] = useState({ lat: +savedLocation.Latitude, lng: +savedLocation.Longitude });
+  const API_KEY = process.env.API_KEY;
 
 const libraries = useMemo(() => ['places'], []);
   const containerStyle = {
@@ -125,7 +126,7 @@ const libraries = useMemo(() => ['places'], []);
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyAHFRZ7n1y4ngh9aS4kj2HpOzEzjOBBUjg",
+    googleMapsApiKey: API_KEY,
     libraries
   })
 
