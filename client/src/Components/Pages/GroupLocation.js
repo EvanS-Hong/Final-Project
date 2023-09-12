@@ -8,7 +8,7 @@ import usePlacesAutoComplete, { getGeocode, getLatLng } from 'use-places-autocom
 export default function GroupLocation() {
   const [location, setLocation] = useState({ lat: 35.6761919, lng: 139.6503106 });
   const libraries = useMemo(() => ['places'], []);
-  const API_KEY = process.env.API_KEY;
+  const apikey = process.env.REACT_APP_TOKEN_SECRET;
 
 
 
@@ -49,7 +49,7 @@ export default function GroupLocation() {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: API_KEY,
+    googleMapsApiKey: apikey,
     libraries
   })
 
