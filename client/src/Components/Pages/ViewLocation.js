@@ -51,7 +51,9 @@ export default function ViewLocation() {
       <>
       <div className="container">
         <div className="viewcontainer">
+          <div className="customdiv">
           <PlacesAutoComplete className="selectbox" onSelect={(latLng, address) =>  setLocation(latLng)} />
+          </div>
           <div className="map">
             <GoogleMap
               mapContainerStyle={containerStyle}

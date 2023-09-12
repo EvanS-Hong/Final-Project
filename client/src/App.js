@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import ViewLocation from './Components/Pages/ViewLocation';
 import AddLocation from './Components/Pages/AddLocation';
 import SavedLocation from './Components/Pages/SavedLocation';
-import GroupLocation from './Components/Pages/GroupLocation';
 
 
 function App() {
@@ -24,7 +23,6 @@ function App() {
         <Route path="ViewLocation" element={<ViewLocation />} />
         <Route path="AddLocation" element={<AddLocation />} />
         <Route path="SavedLocation" element={<SavedLocation /> } />
-        <Route path="GroupLocation" element={<GroupLocation /> } />
       </Routes>
     </>
   );
