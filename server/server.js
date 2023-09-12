@@ -138,6 +138,8 @@ app.put('/api/Locations/edit-location', async (req, res, next) => {
   }
 });
 
+app.get('*', (req, res) => res.sendFile(`${reactStaticDir}/index.html`));
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
