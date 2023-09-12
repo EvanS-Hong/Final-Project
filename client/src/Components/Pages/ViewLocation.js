@@ -8,9 +8,7 @@ import usePlacesAutoComplete, {getGeocode, getLatLng } from 'use-places-autocomp
 export default function ViewLocation() {
   const [location, setLocation] = useState({ lat: 35.6761919, lng: 139.6503106 });
   const libraries = useMemo(() => ['places'], []);
-  const API_KEY = process.env.API_KEY;
-  console.log(process.env.KEY);
-
+  const apikey = process.env.REACT_APP_TOKEN_SECRET;
 
   useEffect(() => {
     async function displayLocation(address) {
@@ -33,7 +31,7 @@ export default function ViewLocation() {
 
     const { isLoaded } = useJsApiLoader({
       id: 'google-map-script',
-      googleMapsApiKey: API_KEY,
+      googleMapsApiKey: apikey,
       libraries
     })
 
@@ -53,7 +51,9 @@ export default function ViewLocation() {
       <>
       <div className="container">
         <div className="viewcontainer">
+          <div className="customdiv">
           <PlacesAutoComplete className="selectbox" onSelect={(latLng, address) =>  setLocation(latLng)} />
+          </div>
           <div className="map">
             <GoogleMap
               mapContainerStyle={containerStyle}

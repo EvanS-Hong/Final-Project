@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo,} from 'react';
 import React from 'react';
 import './AddLocation.css';
 import './SavedLocation.css';
-import { GoogleMap, MarkerF, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import usePlacesAutoComplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 
 
@@ -116,7 +116,7 @@ export default function SavedLocation() {
  function ViewLocation() {
   const savedLocation = (JSON.parse(localStorage.getItem('location')))
   const [location, setLocation] = useState({ lat: +savedLocation.Latitude, lng: +savedLocation.Longitude });
-  const API_KEY = process.env.API_KEY;
+   const apikey = process.env.REACT_APP_TOKEN_SECRET;
 
 const libraries = useMemo(() => ['places'], []);
   const containerStyle = {
@@ -126,7 +126,7 @@ const libraries = useMemo(() => ['places'], []);
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: API_KEY,
+    googleMapsApiKey: apikey,
     libraries
   })
 
