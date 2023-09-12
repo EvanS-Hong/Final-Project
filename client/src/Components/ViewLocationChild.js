@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react'
 import React from 'react';
-import { GoogleMap, MarkerF, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import './Pages/ViewLocation.css';
 import usePlacesAutoComplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 

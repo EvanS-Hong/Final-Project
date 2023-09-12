@@ -8,7 +8,6 @@ import SavedLocation from './Components/Pages/SavedLocation';
 
 
 function App() {
-   const [currentCoordinates, setCurrentCoordinates] = useState();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {

@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo,} from 'react';
 import React from 'react';
 import './AddLocation.css';
 import './SavedLocation.css';
-import { GoogleMap, MarkerF, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import usePlacesAutoComplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 
 
